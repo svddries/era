@@ -58,6 +58,7 @@ SET(HEADER_FILES
     include/era/types.h
     include/era/buffer.h
     include/era/blackboard.h
+    include/era/plugin.h
 )
 
 #add_library(era
