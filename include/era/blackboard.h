@@ -5,6 +5,9 @@
 #include <string>
 #include <era/buffer.h>
 
+#include <typeinfo>
+#include <iostream>
+
 namespace era
 {
 
@@ -31,6 +34,15 @@ public:
 
 // ----------------------------------------------------------------------------------------------------
 
+struct BufferInfo
+{
+    void* buffer;
+    std::string type_name;
+    deleter_func deleter;
+};
+
+// ----------------------------------------------------------------------------------------------------
+
 class Blackboard
 {
 
@@ -40,9 +52,9 @@ public:
 
     ~Blackboard()
     {
-        for(std::map<std::string, std::pair<void*, deleter_func> >::iterator it = buffers_.begin(); it != buffers_.end(); ++it)
+        for(std::map<std::string, BufferInfo>::iterator it = buffers_.begin(); it != buffers_.end(); ++it)
         {
-            it->second.second(it->second.first);
+            it->second.deleter(it->second.buffer);
         }
     }
 
@@ -51,15 +63,26 @@ public:
     {
         Port<T> p;
 
-        std::map<std::string, std::pair<void*, deleter_func> >::iterator it = buffers_.find(name);
+        std::map<std::string, BufferInfo>::iterator it = buffers_.find(name);
         if (it == buffers_.end())
         {
             p.buffer = new Buffer<T>;
-            buffers_[name] = std::make_pair<void*, deleter_func>(p.buffer, &deleter<T>);
+            BufferInfo& info = buffers_[name];
+            info.buffer = p.buffer;
+            info.deleter = &deleter<Buffer<T> >;
+            info.type_name = typeid(T).name();
         }
         else
         {
-            p.buffer = reinterpret_cast<Buffer<T>*>(it->second.first);
+            if (std::string(typeid(T).name()) == it->second.type_name)
+            {
+                p.buffer = reinterpret_cast<Buffer<T>*>(it->second.buffer);
+            }
+            else
+            {
+                std::cout << "ERROR: trying to open buffer '" << name << "' with wrong type: has type '" << it->second.type_name
+                          << "'. Type asked: '" << typeid(T).name() << "'." << std::endl;
+            }
         }
 
         return p;
@@ -67,7 +90,7 @@ public:
 
 private:
 
-    std::map<std::string, std::pair<void*, deleter_func> > buffers_;
+    std::map<std::string, BufferInfo> buffers_;
 
 };
 

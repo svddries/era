@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 {
     era::Blackboard bb;
     era::Port<double> p = bb.openBuffer<double>("test");
+    era::Port<std::string> p3 = bb.openBuffer<std::string>("bla");
 
     std::cout << "Start" << std::endl;
 
