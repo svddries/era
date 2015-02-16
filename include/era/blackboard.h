@@ -80,17 +80,26 @@ public:
             }
             else
             {
-                std::cout << "ERROR: trying to open buffer '" << name << "' with wrong type: has type '" << it->second.type_name
-                          << "'. Type asked: '" << typeid(T).name() << "'." << std::endl;
+                std::string error = "ERROR: trying to open buffer '" + name + "' with wrong type '" + typeid(T).name()
+                        + "'. Buffer has type: '" + it->second.type_name + "'.";
+
+                std::cout << error << std::endl;
+                error_ += error + '\n';
             }
         }
 
         return p;
     }
 
+    bool ok() const { return error_.empty(); }
+
+    const std::string& error_message() const { return error_; }
+
 private:
 
     std::map<std::string, BufferInfo> buffers_;
+
+    std::string error_;
 
 };
 

@@ -45,5 +45,9 @@ int main(int argc, char **argv)
     if (it2 != p2.buffer->end())
         std::cout << "Hi: " << asTime(it2->first) << ": " << it2->second << std::endl;
 
+    era::Port<int> p4 = bb.openBuffer<int>("test");
+
+    std::cout << bb.ok() << std::endl;
+
     return 0;
 }
