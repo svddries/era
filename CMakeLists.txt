@@ -9,7 +9,12 @@ SET(HEADER_FILES
     include/era/types.h
     include/era/buffer.h
     include/era/blackboard.h
-    include/era/plugin.h
+    include/era/component.h
+)
+
+add_library(era
+    src/engine.cpp
+	${HEADER_FILES}
 )
 
 # ------------------------------------------------------------------------------------------------
@@ -18,5 +23,5 @@ SET(HEADER_FILES
 
 add_executable(era_test
     test/test.cpp
-    ${HEADER_FILES}
 )
+target_link_libraries(era_test era)

@@ -53,6 +53,15 @@ public:
         }
     }
 
+    bool latest(T& data) const
+    {
+        if (cache_.empty())
+            return false;
+
+        data = (--cache_.end())->second;
+        return true;
+    }
+
     inline const_iterator begin() const { return cache_.begin(); }
     inline const_iterator end() const { return cache_.end(); }
 
