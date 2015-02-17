@@ -7,8 +7,6 @@
 namespace era
 {
 
-typedef double real;
-
 // --------------------------------------------------------------------------------
 
 template<typename T>
@@ -495,37 +493,31 @@ public:
 
 // --------------------------------------------------------------------------------
 
-typedef Vec2T<real> Vec2;
 typedef Vec2T<float> Vec2f;
 typedef Vec2T<double> Vec2d;
 typedef Vec2T<int> Vec2i;
 typedef Vec2T<unsigned int> Vec2u;
 
-typedef Vec3T<real> Vec3;
 typedef Vec3T<float> Vec3f;
 typedef Vec3T<double> Vec3d;
 typedef Vec3T<int> Vec3i;
 typedef Vec3T<unsigned int> Vec3u;
 
-typedef Mat2T<real> Mat2;
 typedef Mat2T<float> Mat2f;
 typedef Mat2T<double> Mat2d;
 typedef Mat2T<int> Mat2i;
 typedef Mat2T<unsigned int> Mat2u;
 
-typedef Mat3T<real> Mat3;
 typedef Mat3T<float> Mat3f;
 typedef Mat3T<double> Mat3d;
 typedef Mat3T<int> Mat3i;
 typedef Mat3T<unsigned int> Mat3u;
 
-typedef Transform2T<real> Transform2;
 typedef Transform2T<float> Transform2f;
 typedef Transform2T<double> Transform2d;
 typedef Transform2T<int> Transform2i;
 typedef Transform2T<unsigned int> Transform2u;
 
-typedef Transform3T<real> Transform3;
 typedef Transform3T<float> Transform3f;
 typedef Transform3T<double> Transform3d;
 typedef Transform3T<int> Transform3i;
