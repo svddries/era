@@ -16,6 +16,7 @@ Engine::~Engine()
 {
     for(std::map<std::string, Component*>::iterator it = components_.begin(); it != components_.end(); ++it)
     {
+        it->second->stop();
         delete it->second;
     }
 }

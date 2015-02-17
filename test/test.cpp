@@ -61,9 +61,10 @@ public:
     void process()
     {
         double d;
-        if (p_test_.buffer->latest(d))
+        era::Time t;
+        if (p_test_.buffer->latest(d, t))
         {
-            std::cout << "Latest value: " << d << std::endl;
+            std::cout << "Latest value: " << d << " ( time = " << t << ")" << std::endl;
         }
     }
 

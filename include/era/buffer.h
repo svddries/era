@@ -23,7 +23,7 @@ public:
     {
         if (max_size_ > 0 && cache_.size() == max_size_)
         {
-            if (cache_.begin()->second > value)
+            if (cache_.begin()->first > t)
                 return;
             cache_.erase(cache_.begin());
         }
@@ -53,12 +53,16 @@ public:
         }
     }
 
-    bool latest(T& data) const
+    bool latest(T& data, era::Time& t) const
     {
         if (cache_.empty())
             return false;
 
-        data = (--cache_.end())->second;
+        typename std::map<Time, T>::const_iterator it = --cache_.end();
+
+        data = it->second;
+        t = it->first;
+
         return true;
     }
 

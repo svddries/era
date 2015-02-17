@@ -31,6 +31,8 @@ public:
 
     virtual void process() = 0;
 
+    virtual void stop() {}
+
     const std::string& name() const { return name_; }
 
 private:

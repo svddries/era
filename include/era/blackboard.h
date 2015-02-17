@@ -66,7 +66,7 @@ public:
         std::map<std::string, BufferInfo>::iterator it = buffers_.find(name);
         if (it == buffers_.end())
         {
-            p.buffer = new Buffer<T>;
+            p.buffer = new Buffer<T>(10);   // TODO: get rid of hard-coded buffer size
             BufferInfo& info = buffers_[name];
             info.buffer = p.buffer;
             info.deleter = &deleter<Buffer<T> >;
