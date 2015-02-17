@@ -10,6 +10,7 @@ SET(HEADER_FILES
     include/era/buffer.h
     include/era/blackboard.h
     include/era/component.h
+    include/era/math/matrix.h
 )
 
 add_library(era
